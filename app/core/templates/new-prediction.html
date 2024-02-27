@@ -1,0 +1,34 @@
+{% extends 'prediction-base.html' %}
+
+{% block title %}New prediction{% endblock %}
+
+{% block home_content %}
+<div class="text-right mt-3 mr-3">
+    <a type="button" class="btn btn-primary" href="{% url 'home' %}">Back</a>
+</div>
+<div class="form mt-5">
+    <p>To get started you only need a valid csv file</p>
+
+    <form id="formulario" action="{% url 'new_prediction' %}" method="post" class="mx-auto" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="custom-file mb-4">
+            <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".csv">
+            <label class="custom-file-label" for="customFile">Select a csv file</label>
+        </div>
+
+        <div class="alert alert-danger d-none" role="alert">
+            El fichero no es válido
+        </div>
+
+        <div class="alert alert-info d-none" role="alert">
+            The waiting time will depend on your computer and the size of the CSV.
+        </div>
+
+        <div class="spinner-border d-none mb-1" role="status"></div>
+
+        <div class="mt-1">
+            <button id="submit" type="submit" class="btn btn-primary" disabled>Start</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

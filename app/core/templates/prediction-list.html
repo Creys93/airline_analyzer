@@ -1,0 +1,86 @@
+{% extends 'prediction-base.html' %}
+{% load custom_filters %}
+
+{% block title %}Predicciones{% endblock %}
+
+{% block home_content %}
+    <form id="formulario" action="{% url 'new_prediction' %}" method="get" class="mx-auto mt-4 mb-4">
+        <button id="new-prediction" type="submit" class="btn btn-primary ml-2">New prediction</button>
+    </form>
+    <div class="form-group filter-container mx-auto pr-3 d-flex">
+        <input type="text" class="form-control filter" id="filter" aria-describedby="filter" placeholder="Insert a filter">
+        <input type="date" class="form-control filter-date ml-1" id="from" aria-describedby="from">
+        <button id="filter-button" class="btn btn-primary ml-1">Filter</button>
+        <button id="reset-button" class="btn btn-secondary ml-1">Reset</button>
+    </div>
+    {% if data.paginator.results %}
+    <div class="mt-1 mb-1 text-left results mx-auto">
+        <strong> Results: {{data.paginator.total_results}}</strong>
+    </div>
+    <div class="prediction-table mx-auto">
+        <table class="table mx-auto mb-4">
+            <thead class="bg-primary">
+                <tr>
+                    {% for column in columns %}
+                    <th>
+                        <a class="sorter" href="?page={{ data.paginator.current_page }}&orderBy={{ column.field }}&orderType={% if data.paginator.order_by == column.field %}{% if data.paginator.order_type == 'asc' %}desc{% else %}asc{% endif %}{% else %}asc{% endif %}{% if some_parameter %}&param_name={{ some_parameter }}{% endif %}{% if another_parameter %}&another_param_name={{ another_parameter }}{% endif %}">
+                            {{ column.label }}
+                            {% if data.paginator.order_by == column.field %}
+                                {% if data.paginator.order_type == 'asc' %}
+                                    <span>&#9650;</span>
+                                {% else %}
+                                    <span>&#9660;</span>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                    {% endfor %}
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for predictionResult in data.paginator.results %}
+                <tr>
+                    {% for column in columns %}
+                    <td>{{ predictionResult|get_value:column.field }}</td>
+                    {% endfor %}
+                    <td>
+                        <a class="detail" href="{% url 'prediction-detail' predictionResult.id %}">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <form action="{% url 'delete_prediction' predictionResult.pk %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button class="delete" type="submit"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>  
+    {% if data.paginator.num_pages|length > 1 %}
+        <nav class="mt-2">
+            <ul class="pagination justify-content-center">
+                <li class="page-item {% if data.paginator.current_page == 1 %}disabled{% endif %}">
+                    <a class="page-link" href="?page={{ data.paginator.current_page|add:-1 }}&orderBy={{data.paginator.order_by}}&orderType={{data.paginator.order_type}}" tabindex="-1">Previous</a>
+                </li>
+                {% for i in data.paginator.num_pages %}
+                    <li class="page-item">
+                        {% if data.paginator.current_page == i %}
+                        <span class="page-link active">{{ i }}</span>
+                        {% else %}
+                        <a class="page-link disabled" href="?page={{i}}&orderBy={{data.paginator.order_by}}&orderType={{data.paginator.order_type}}">{{ i }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                <li class="page-item {% if data.paginator.num_pages|length == data.paginator.current_page %}disabled{% endif %}">
+                    <a class="page-link" href="?page={{ data.paginator.current_page|add:1 }}&orderBy={{data.paginator.order_by}}&orderType={{data.paginator.order_type}}">Next</a>
+                </li>
+            </ul>            
+        </nav>
+{% endif %}
+
+    {% endif %}
+
+    
+{% endblock %}

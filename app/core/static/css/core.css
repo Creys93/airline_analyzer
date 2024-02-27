@@ -1,0 +1,95 @@
+/* Styles for the content of the home page */
+.home-content h1, .home-content h4 {
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+}
+
+/* Styles for table headers */
+th {
+    color: #fff;
+}
+
+/* Styles for delete buttons in the prediction table */
+.prediction-table button.delete {
+    background: none;
+    color: red;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+/* Styles for detail links in the prediction table */
+.prediction-table a.detail:hover {
+    text-decoration: none;
+}
+
+/* Styles for forms */
+form {
+    max-width: 30%;
+}
+
+/* Styles for custom file label in forms */
+.error:focus ~ .custom-file-label,
+.error ~ .custom-file-label {
+    border-color: #ff0000;
+    box-shadow: 0 0 0 0.3rem rgba(206, 38, 38, 0.25);
+}
+
+/* Styles for links in prediction results containers */
+.predictions-results-container a,
+.prediction-table th a {
+    color: #fff !important;
+    cursor: pointer;
+}
+
+/* Styles for the prediction results container */
+.predictions-results-container {
+    overflow-y: auto;
+    max-height: 40.75rem;
+}
+
+/* Styles for sticky table header in prediction results container */
+.predictions-results-container .table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Styles for pagination */
+.pagination .active {
+    color: #fff !important;
+    background-color: #007bff !important;
+}
+
+.page-item {
+    border: 1px solid #007bff !important;
+}
+
+/* Styles for filter and results containers */
+.filter-container, .results {
+    max-width: 95% !important;
+}
+
+/* Styles for the filter */
+.filter {
+    max-width: 20% !important;
+    border: 1px solid #000;
+}
+
+/* Styles for the date filter */
+.filter-date {
+    max-width: 13rem !important;
+    border: 1px solid #000;
+}
+
+/* Styles for cells in the SVM results table */
+.svm-result-table td {
+    font-weight: bold;
+}
+
+/* Styles for the SVM results table detail */
+.svm-result-table-detail {
+    min-width: 27rem;
+}

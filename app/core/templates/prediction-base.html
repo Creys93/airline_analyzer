@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block injected_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/core.css' %}">
+{% endblock %}
+
+{% block injected_js %}
+<script src="{% static 'js/core.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="home-content">
+    <div class="bg-primary p-3">
+        <h1>Welcome to Airline Analyzer</h1>
+        <h4>Start to analyze the statics of your flights</h4>
+    </div>
+    
+    {% block home_content %}
+    {% endblock %}
+
+</div>
+
+{% endblock %}
+
