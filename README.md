@@ -17,7 +17,7 @@ The Django project will follow best practices in web development and security, e
 # Running the Application
 To run the app, you'll need to execute the following commands:
 
-Download dependencies from requirements.txt
-Generate the database: python manage.py migrate
-Start the server: python manage.py runserver
-Detect changes in models.py of the applications (in this project there are models only in core): python manage.py makemigrations
+- Download dependencies from requirements.txt
+- Generate the database: python manage.py migrate
+- Start the server: python manage.py runserver
+- Detect changes in models.py of the applications (in this project there are models only in core): python manage.py makemigrations
