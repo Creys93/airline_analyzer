@@ -30,6 +30,7 @@ def validate_csv(file):
         return HttpResponseBadRequest("The selected file is not a valid CSV file.")
     
     if not are_columns_valid(file):
+        print('entra en columnas no validas')
         return HttpResponseBadRequest("The selected file does not contain valid values.")
     
     return JsonResponse({'message': 'Valid CSV file'}, status=200)

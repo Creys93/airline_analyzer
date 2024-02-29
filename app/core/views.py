@@ -49,8 +49,9 @@ def new_prediction(request):
         Redirects to the home page if the prediction is successfully processed,
         otherwise renders the new prediction form.
     """
-    if request.method == 'POST' and request.FILES.get('filename'):
-        preprocessing(request.FILES.get('filename'), request.user)
+    file = request.FILES.get('filename')
+    if request.method == 'POST' and file:
+        preprocessing(file, request.user)
         return redirect('home')
     else:
         return render(request, 'new-prediction.html')
